@@ -11,6 +11,11 @@ function showErrorMsg(input, msg) {
   small.innerText = msg;
 }
 
+function showSuccess(input) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control success";
+}
+
 function isValidEmail(email) {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -18,37 +23,48 @@ function isValidEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-function showSuccess(input) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control success";
+function checkRequired(inputArr) {
+  inputArr.forEach(function (input) {
+    if (input.value.trim() === "") {
+      showErrorMsg(input, `${getFieldName(input)} is required.`);
+    } else {
+      showSuccess(input);
+    }
+  });
+}
+
+function getFieldName(input) {
+  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (username.value === "") {
-    showErrorMsg(username, "Username is required....");
-  } else {
-    showSuccess(username);
-  }
+  checkRequired([username, email, password, cnfrmPassword]);
 
-  if (email.value === "") {
-    showErrorMsg(email, "Email is required....");
-  } else if (!isValidEmail(email.value)) {
-    showErrorMsg(email, "Your email isn't valid...");
-  } else {
-    showSuccess(email);
-  }
+  //   if (username.value === "") {
+  //     showErrorMsg(username, "Username is required....");
+  //   } else {
+  //     showSuccess(username);
+  //   }
 
-  if (password.value === "") {
-    showErrorMsg(password, "password is required....");
-  } else {
-    showSuccess(password);
-  }
+  //   if (email.value === "") {
+  //     showErrorMsg(email, "Email is required....");
+  //   } else if (!isValidEmail(email.value)) {
+  //     showErrorMsg(email, "Your email isn't valid...");
+  //   } else {
+  //     showSuccess(email);
+  //   }
 
-  if (cnfrmPassword.value === "") {
-    showErrorMsg(cnfrmPassword, "Confirm Password is required....");
-  } else {
-    showSuccess(cnfrmPassword);
-  }
+  //   if (password.value === "") {
+  //     showErrorMsg(password, "password is required....");
+  //   } else {
+  //     showSuccess(password);
+  //   }
+
+  //   if (cnfrmPassword.value === "") {
+  //     showErrorMsg(cnfrmPassword, "Confirm Password is required....");
+  //   } else {
+  //     showSuccess(cnfrmPassword);
+  //   }
 });
