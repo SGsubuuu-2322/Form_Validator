@@ -33,6 +33,22 @@ function checkRequired(inputArr) {
   });
 }
 
+function checkLength(input, min, max) {
+  if (input.value < min) {
+    showErrorMsg(
+      input,
+      `${getFieldName(input)} must be atleast ${min} characters...`
+    );
+  } else if (input.value > max) {
+    showErrorMsg(
+      input,
+      `${getFieldName(input)} must be less than ${max} characters...`
+    );
+  } else {
+    showSuccess(input);
+  }
+}
+
 function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
@@ -41,6 +57,8 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   checkRequired([username, email, password, cnfrmPassword]);
+  checkLength(username, 3, 6);
+  checkLength(password, 6, 12);
 
   //   if (username.value === "") {
   //     showErrorMsg(username, "Username is required....");
