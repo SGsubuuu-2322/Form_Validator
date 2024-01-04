@@ -11,6 +11,13 @@ function showErrorMsg(input, msg) {
   small.innerText = msg;
 }
 
+function isValidEmail(email) {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  return re.test(String(email).toLowerCase());
+}
+
 function showSuccess(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
@@ -27,6 +34,8 @@ form.addEventListener("submit", (e) => {
 
   if (email.value === "") {
     showErrorMsg(email, "Email is required....");
+  } else if (!isValidEmail(email.value)) {
+    showErrorMsg(email, "Your email isn't valid...");
   } else {
     showSuccess(email);
   }
