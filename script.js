@@ -24,4 +24,22 @@ form.addEventListener("submit", (e) => {
   } else {
     showSuccess(username);
   }
+
+  if (email.value === "") {
+    showErrorMsg(email, "Email is required....");
+  } else {
+    showSuccess(email);
+  }
+
+  if (password.value === "") {
+    showErrorMsg(password, "password is required....");
+  } else {
+    showSuccess(password);
+  }
+
+  if (cnfrmPassword.value === "") {
+    showErrorMsg(cnfrmPassword, "Confirm Password is required....");
+  } else {
+    showSuccess(cnfrmPassword);
+  }
 });
