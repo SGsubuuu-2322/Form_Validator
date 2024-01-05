@@ -38,18 +38,24 @@ function checkRequired(inputArr) {
 }
 
 function checkLength(input, min, max) {
-  if (input.value < min) {
+  if (input.value.length < min) {
     showErrorMsg(
       input,
       `${getFieldName(input)} must be atleast ${min} characters...`
     );
-  } else if (input.value > max) {
+  } else if (input.value.length > max) {
     showErrorMsg(
       input,
       `${getFieldName(input)} must be less than ${max} characters...`
     );
   } else {
     showSuccess(input);
+  }
+}
+
+function checkPasswords(input1, input2) {
+  if (input1.value !== input2.value) {
+    showErrorMsg(input2, "Passwords aren't equal...");
   }
 }
 
@@ -64,6 +70,7 @@ form.addEventListener("submit", (e) => {
   checkLength(username, 3, 6);
   checkLength(password, 6, 12);
   checkEmail(email);
+  checkPasswords(password, cnfrmPassword);
 
   //   if (username.value === "") {
   //     showErrorMsg(username, "Username is required....");
