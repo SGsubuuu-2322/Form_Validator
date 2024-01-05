@@ -67,7 +67,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   checkRequired([username, email, password, cnfrmPassword]);
-  checkLength(username, 3, 6);
+  checkLength(username, 4, 10);
   checkLength(password, 6, 12);
   checkEmail(email);
   checkPasswords(password, cnfrmPassword);
