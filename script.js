@@ -16,11 +16,15 @@ function showSuccess(input) {
   formControl.className = "form-control success";
 }
 
-function isValidEmail(email) {
+function checkEmail(input) {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  return re.test(String(email).toLowerCase());
+  if (re.test(input.value.trim())) {
+    showSuccess(input);
+  } else {
+    showErrorMsg(input, "Email does not valid");
+  }
 }
 
 function checkRequired(inputArr) {
@@ -59,6 +63,7 @@ form.addEventListener("submit", (e) => {
   checkRequired([username, email, password, cnfrmPassword]);
   checkLength(username, 3, 6);
   checkLength(password, 6, 12);
+  checkEmail(email);
 
   //   if (username.value === "") {
   //     showErrorMsg(username, "Username is required....");
